@@ -69,6 +69,12 @@ function palabrasFrases(numPalabra,frase){
   }
 }
 
+function saberSiInsertarInformacionPersona(mensaje){
+  if(mensaje.substring(0,24) == "Insertar informacion de  "){
+    return true;
+  }
+  return false;
+}
 
 
-module.exports = {sendMessage,saberBuscaInfoPersona,extraerPersona,saberSiInsertarPersona,palabrasFrases};
+module.exports = {sendMessage,saberBuscaInfoPersona,extraerPersona,saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona};

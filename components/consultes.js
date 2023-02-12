@@ -32,7 +32,7 @@ async function todosLosRecordatorios() {
     return results;
 }
 
-async function insertaInformacionPersona(nombre, edad,telefono,gmail,ciudad,direccion){
+async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
     const sql = `INSERT INTO Personas (nombre, edad,telefono,gmail,ciudad,direccion) VALUES (?,?,?,?,?,?)`;
     const [results] = await connection.promise().execute(sql, [nombre,edad,telefono,gmail,ciudad,direccion]);
@@ -40,4 +40,4 @@ async function insertaInformacionPersona(nombre, edad,telefono,gmail,ciudad,dire
     connection.end();
 }
 
-module.exports = {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaInformacionPersona};
+module.exports = {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona};
