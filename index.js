@@ -70,7 +70,7 @@ app.post("/webhook",function(req,res){
         let sql = req.body.Body
         console.log(palabrasFrases(1,sql))
         insertaInformacionPersona(palabrasFrases(1,sql),palabrasFrases(2,sql),palabrasFrases(3,sql),palabrasFrases(4,sql),palabrasFrases(5,sql),palabrasFrases(6,sql))
-        sendMessage(req.body.WaId,palabrasFrases(sql,1) + " insertada!!")
+        sendMessage(req.body.WaId,"La persona " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
 
 })
