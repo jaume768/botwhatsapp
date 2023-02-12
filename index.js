@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 
-let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"';
+let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"';
 
 app.post("/webhook",function(req,res){
     if(saberBuscaInfoPersona(req.body.Body)){
@@ -67,10 +67,13 @@ app.post("/webhook",function(req,res){
         })();
     }
     if(saberSiInsertarPersona(req.body.Body)){
-        console.log("insertar")
+        let sql = req.body.Body
+        insertaInformacionPersona(palabrasFrases(sql,1),palabrasFrases(sql,2),palabrasFrases(sql,3),palabrasFrases(sql,4),palabrasFrases(sql,5),palabrasFrases(sql,6))
+        sendMessage(req.body.WaId,palabrasFrases(sql,1) + " insertada!!")
     }
+
 })
 
 app.listen(PORT,() => {
-    console.log("el servidor esta en el puerto 3000")
+    console.log("el servidor esta en el puerto " + PORT)
 });
