@@ -35,7 +35,7 @@ async function todosLosRecordatorios() {
 async function insertaInformacionPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
     const sql = `INSERT INTO Personas (nombre, edad,telefono,gmail,ciudad,direccion) VALUES (?,?,?,?,?,?)`;
-    const [results] = await connection.promise().execute(sql, [nombre, edad,telefono,gmail,ciudad,direccion]);
+    const [results] = await connection.promise().execute(sql, [nombre,edad,telefono,gmail,ciudad,direccion]);
 
     connection.end();
 }

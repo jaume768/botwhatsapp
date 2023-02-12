@@ -68,7 +68,8 @@ app.post("/webhook",function(req,res){
     }
     if(saberSiInsertarPersona(req.body.Body)){
         let sql = req.body.Body
-        insertaInformacionPersona(palabrasFrases(sql,1),palabrasFrases(sql,2),palabrasFrases(sql,3),palabrasFrases(sql,4),palabrasFrases(sql,5),palabrasFrases(sql,6))
+        console.log(palabrasFrases(1,sql))
+        insertaInformacionPersona(palabrasFrases(1,sql),palabrasFrases(2,sql),palabrasFrases(3,sql),palabrasFrases(4,sql),palabrasFrases(5,sql),palabrasFrases(6,sql))
         sendMessage(req.body.WaId,palabrasFrases(sql,1) + " insertada!!")
     }
 
