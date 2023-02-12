@@ -9,10 +9,6 @@ app.use(express.urlencoded({ extended:true }))
 
 let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"';
 
-
-let frase = "Insertar persona pepito,12,683472110,prova@gmail.com,Manacor,mallorca"
-insertaInformacionPersona(palabrasFrases(1,frase),palabrasFrases(2,frase),palabrasFrases(3,frase),palabrasFrases(4,frase),palabrasFrases(5,frase),palabrasFrases(6,frase))
-
 app.post("/webhook",function(req,res){
     if(saberBuscaInfoPersona(req.body.Body)){
         (async () => {
