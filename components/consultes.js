@@ -42,6 +42,8 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
 async function insertarInfromacion(nombre,informacion){
 
+    console.log(nombre)
+    console.log(informacion)
     const sql = `INSERT INTO informacion (informacion) values(?)`
     const id_persona = `select Personas_info.id_persona from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = ?;`
     const id_info = `select informacion.id from informacion order by informacion.id Desc limit 1;`
