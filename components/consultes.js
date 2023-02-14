@@ -42,18 +42,15 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
 async function insertarInfromacion(nombre,informacion){
 
-    console.log(nombre)
-    console.log(informacion)
     const sql = `INSERT INTO informacion (informacion) values(?)`
     const id_persona = `select Personas_info.id_persona from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = "?";`
     const id_info = `select informacion.id from informacion order by informacion.id Desc limit 1;`
     const insertInfo_Persona = `insert into Personas_info values (?,?)`
 
     const [results] = await connection.promise().execute(sql, [informacion]);
-    const [idPersona] = await connection.promise().query(id_persona, [nombre]);
-    console.log(idPersona[0].id_persona)
+    const idPersona = await connection.promise().query(id_persona, [nombre]);
     const [idInfo] = await connection.promise().query(id_info);
-    const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id_persona,idInfo[0].id]);
+    "const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0][0].id_persona,idInfo[0].id]);"
 
     connection.end();
 
