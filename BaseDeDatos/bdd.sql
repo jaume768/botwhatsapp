@@ -49,12 +49,10 @@ VALUES
 INSERT INTO Recordatorio (titulo, descripcion, fecha, hora)
 VALUES
     ('Sopar Familiar', 'Es sopar de cada any amb sa familia', '2023-12-25', '20:30:00');
+
+
 Query per treure tota la informacio de una persona:
 
-"select * FROM 
-    Personas 
-    INNER JOIN Personas_info ON Personas.id = Personas_info.id_persona 
-    INNER JOIN informacion ON Personas_info.id_info = informacion.id 
-WHERE 
-    Personas.nombre = "jaume"; "
+select * from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = "jaume" limit 1;
+
 

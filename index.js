@@ -1,5 +1,5 @@
 const {sendMessage,saberBuscaInfoPersona,extraerPersona,saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona} = require("./components/normales.js")
-const {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona} = require("./components/consultes.js")
+const {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion} = require("./components/consultes.js")
 const {PORT} = require('./config.js')
 
 const express = require('express');
@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 
-let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"';
+let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)" \n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"';
 
 app.post("/webhook",function(req,res){
     if(saberBuscaInfoPersona(req.body.Body)){
@@ -73,7 +73,8 @@ app.post("/webhook",function(req,res){
         sendMessage(req.body.WaId,"La persona " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
     if(saberSiInsertarInformacionPersona(req.body.Body)){
-        
+        insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body))
+        sendMessage(req.body.WaId,"La Información de " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
 
 })
