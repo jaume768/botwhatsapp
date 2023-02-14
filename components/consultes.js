@@ -49,7 +49,7 @@ async function insertarInfromacion(nombre,informacion){
 
     "const [results] = await connection.promise().execute(sql, [informacion]);"
     const [idPersona] = await connection.promise().query(id_persona, [nombre]);
-    console.log(idPersona)
+    console.log(idPersona[0].id)
 
     const [idInfo] = await connection.promise().query(id_info);
     "const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);"
