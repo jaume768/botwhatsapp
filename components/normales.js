@@ -70,7 +70,7 @@ function palabrasFrases(numPalabra,frase){
 }
 
 function saberSiInsertarInformacionPersona(mensaje){
-  if(mensaje.substring(0,24) == "Insertar informacion de  "){
+  if(mensaje.substring(0,24) == "Insertar información de "){
     return true;
   }
   return false;
