@@ -73,6 +73,8 @@ app.post("/webhook",function(req,res){
         sendMessage(req.body.WaId,"La persona " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
     if(saberSiInsertarInformacionPersona(req.body.Body)){
+        
+        console.log(typeof palabrasFrases(1,req.body.Body))
         insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body))
         sendMessage(req.body.WaId,"La Información de " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
