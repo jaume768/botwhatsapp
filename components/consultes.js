@@ -49,8 +49,14 @@ async function insertarInfromacion(nombre,informacion){
 
     const [results] = await connection.promise().execute(sql, [informacion]);
     const idPersona = await connection.promise().query(id_persona, [nombre]);
+    console.log(idPersona[0][0].id_persona)
+
+    let persona = idPersona[0][0].id_persona;
+    if (idPersona[0][0].id_persona == undefined){
+        persona = idPersona[0].id_persona
+    }
     const [idInfo] = await connection.promise().query(id_info);
-    const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0][0].id_persona,idInfo[0].id]);
+    const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [persona,idInfo[0].id]);
 
     connection.end();
 
