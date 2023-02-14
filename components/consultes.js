@@ -51,7 +51,7 @@ async function insertarInfromacion(nombre,informacion){
     const [idPersona] = await connection.promise().query(id_persona, [nombre]);
     console.log(idPersona[0].id)
 
-    const [idInfo] = await connection.promise().query(id_info);
+    "const [idInfo] = await connection.promise().query(id_info);"
     "const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);"
 
 
