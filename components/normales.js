@@ -77,7 +77,7 @@ function saberSiInsertarInformacionPersona(mensaje){
 }
 
 function saberSiDarInformaciónPersona(mensaje){
-  if(mensaje.substring(0,27) == "Dame toda la información de "){
+  if(mensaje.substring(0,28) == "Dame toda la información de "){
     return true;
   }
   return false;

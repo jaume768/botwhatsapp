@@ -65,6 +65,8 @@ async function insertarInfromacion(nombre,informacion,persona){
         const [idInfo] = await connection.promise().query(id_info);
         const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);
 
+        sendMessage(persona,"información insertada")
+
     } catch (error) {
         console.log("tiene un error")
         sendMessage(persona,"información insertada")

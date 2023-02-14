@@ -8,7 +8,12 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 
-let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)" \n \n Consultar el nombre de las personas guardadas: "Personas guardadas" \n \n Consultar todos los recordatorios: "Dime todos los recordatorios" \n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)" \n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"';
+let plantilla = 'Consultar información persona: "Dame la información de (*nombre de la persona*)"' + 
+                '\n \n Consultar el nombre de las personas guardadas: "Personas guardadas"' +  
+                '\n \n Consultar todos los recordatorios: "Dime todos los recordatorios"' +  
+                '\n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"' + 
+                '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
+                '\n \n Saber la información de una persona: "Dame toda la información de (*Nombre de la persona*)"';
 
 app.post("/webhook",function(req,res){
     if(saberBuscaInfoPersona(req.body.Body)){
@@ -77,6 +82,7 @@ app.post("/webhook",function(req,res){
         insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body),req.body.WaId)
     }
     if(saberSiDarInformaciónPersona(req.body.Body)){
+        console.log("funciona")
         informacionPersona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
 
