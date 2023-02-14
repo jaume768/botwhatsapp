@@ -63,7 +63,8 @@ async function insertarInfromacion(nombre,informacion){
     const [idInfo] = await connection.promise().query(id_info);
     const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);
     const sqlborrar = "DELETE FROM informacion WHERE id = (SELECT MAX(id-1) FROM informacion)";
-    
+    const [provarBorrar] = await connection.promise().execute(sqlborrar);
+
     return;
 
 }
