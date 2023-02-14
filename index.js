@@ -1,5 +1,6 @@
-const {sendMessage,saberBuscaInfoPersona,extraerPersona,saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona} = require("./components/normales.js")
-const {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion} = require("./components/consultes.js")
+const {sendMessage,saberBuscaInfoPersona,extraerPersona,
+    saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona} = require("./components/normales.js")
+const {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion,informacion_persona} = require("./components/consultes.js")
 const {PORT} = require('./config.js')
 
 const express = require('express');
@@ -73,9 +74,10 @@ app.post("/webhook",function(req,res){
         sendMessage(req.body.WaId,"La persona " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
     if(saberSiInsertarInformacionPersona(req.body.Body)){
-        
-        insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body),req.body.WaId)
-        sendMessage(req.body.WaId,"La Información de " + palabrasFrases(1,sql) + " ya está insertada!!")
+        insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body),req.body.)
+    }
+    if(saberSiDarInformaciónPersona(req.body.Body)){
+        informacionPersona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
 
 })

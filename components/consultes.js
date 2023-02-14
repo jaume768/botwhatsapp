@@ -64,10 +64,10 @@ async function insertarInfromacion(nombre,informacion,persona){
 
         const [idInfo] = await connection.promise().query(id_info);
         const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);
-        
+
     } catch (error) {
         console.log("tiene un error")
-        sendMessage(persona,"persona insertada")
+        sendMessage(persona,"información insertada")
     }
 
     return;
@@ -75,4 +75,27 @@ async function insertarInfromacion(nombre,informacion,persona){
 
 }
 
-module.exports = {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion};
+async function informacion_persona(persona,nombre) {
+
+    try{
+        const sql = `select * from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = ?;`
+        const [results] = await connection.promise().query(sql,[nombre]);
+        let mensaje = "Nombre: " + results[0].nombre + "\n" 
+                        + "Edad: " + results[0].edad + "\n" 
+                        + "Telefono: " + results[0].telefono + "\n"
+                        + "Gmail: " + results[0].gmail + "\n" 
+                        + "Ciudad: " + results[0].ciudad + "\n"
+                        + "Direccion: " + results[0].direccion + "\n"    
+                        + "Información interesante: "   
+        for(let i = 0; i < results.length; i++) {
+            mensaje += results[i].informacion + ","
+        } 
+        sendMessage(persona,mensaje)                       
+    } catch (error) {
+        console.log("tienes un error: " + error.message)
+    }
+
+}
+
+
+module.exports = {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion,informacion_persona};

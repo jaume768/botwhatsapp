@@ -76,5 +76,13 @@ function saberSiInsertarInformacionPersona(mensaje){
   return false;
 }
 
+function saberSiDarInformaciónPersona(mensaje){
+  if(mensaje.substring(0,27) == "Dame toda la información de "){
+    return true;
+  }
+  return false;
+}
 
-module.exports = {sendMessage,saberBuscaInfoPersona,extraerPersona,saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona};
+module.exports = {sendMessage,saberBuscaInfoPersona,extraerPersona,
+              saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,
+              saberSiDarInformaciónPersona};
