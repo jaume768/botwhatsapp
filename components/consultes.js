@@ -1,4 +1,5 @@
 const connection = require("./BDD.js")
+const {sendMessage} = require("./normales.js")
 
 connection.connect();
 
@@ -49,7 +50,7 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
     connection.end();
 }
 
-async function insertarInfromacion(nombre,informacion){
+async function insertarInfromacion(nombre,informacion,persona){
 
     try {
         const sql = `INSERT INTO informacion (informacion) values(?)`
@@ -68,6 +69,7 @@ async function insertarInfromacion(nombre,informacion){
     
     } catch (error) {
         console.log("tiene un error")
+        sendMessage(persona,"persona insertada")
     }
     
 
