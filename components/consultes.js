@@ -70,11 +70,8 @@ async function insertarInfromacion(nombre,informacion,persona){
     } catch (error) {
         console.log("tiene un error")
         sendMessage(persona,"persona insertada")
-        return;
     }
     
-
-    return;
 
 }
 
