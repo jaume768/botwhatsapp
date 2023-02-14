@@ -51,19 +51,25 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
 async function insertarInfromacion(nombre,informacion){
 
-    const sql = `INSERT INTO informacion (informacion) values(?)`
-    const id_persona = `select Personas.id from Personas where Personas.nombre = ?;`
-    const id_info = `select informacion.id from informacion order by informacion.id Desc limit 1;`
-    const insertInfo_Persona = `insert into Personas_info values (?,?)`
+    try {
+        const sql = `INSERT INTO informacion (informacion) values(?)`
+        const id_persona = `select Personas.id from Personas where Personas.nombre = ?;`
+        const id_info = `select informacion.id from informacion order by informacion.id Desc limit 1;`
+        const insertInfo_Persona = `insert into Personas_info values (?,?)`
 
-    const [results] = await connection.promise().execute(sql, [informacion]);
-    const [idPersona] = await connection.promise().query(id_persona, [nombre]);
-    console.log(idPersona[0].id)
+        const [results] = await connection.promise().execute(sql, [informacion]);
+        const [idPersona] = await connection.promise().query(id_persona, [nombre]);
+        console.log(idPersona[0].id)
 
-    const [idInfo] = await connection.promise().query(id_info);
-    const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);
-    const sqlborrar = "DELETE FROM informacion WHERE id = (SELECT MAX(id-1) FROM informacion)";
-    const [provarBorrar] = await connection.promise().execute(sqlborrar);
+        const [idInfo] = await connection.promise().query(id_info);
+        const [insertInfoPersona] = await connection.promise().execute(insertInfo_Persona, [idPersona[0].id,idInfo[0].id]);
+        const sqlborrar = "DELETE FROM informacion WHERE id = (SELECT MAX(id-1) FROM informacion)";
+        const [provarBorrar] = await connection.promise().execute(sqlborrar);
+    
+    } catch (error) {
+        console.log("tiene un error")
+    }
+    
 
     return;
 
