@@ -3,6 +3,8 @@ const connection = require("./BDD.js")
 connection.connect();
 
 async function informacionPersona(persona) {
+    connection.connect();
+
     const sql = 'select * FROM Personas INNER JOIN Personas_info ON Personas.id = Personas_info.id_persona INNER JOIN informacion ON Personas_info.id_info = informacion.id WHERE Personas.nombre = "' + persona + '";';
   
     const [results, fields] = await connection.promise().query(sql);
@@ -13,6 +15,8 @@ async function informacionPersona(persona) {
 }
 
 async function personasGuardadas() {
+    connection.connect();
+
     const sql = 'select Personas.nombre FROM Personas;';
   
     const [results, fields] = await connection.promise().query(sql);
@@ -23,6 +27,9 @@ async function personasGuardadas() {
 }
 
 async function todosLosRecordatorios() {
+
+    connection.connect();
+
     const sql = 'select titulo, descripcion, fecha, hora FROM Recordatorio;';
   
     const [results, fields] = await connection.promise().query(sql);
@@ -34,6 +41,8 @@ async function todosLosRecordatorios() {
 
 async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
+    connection.connect();
+
     const sql = `INSERT INTO Personas (nombre, edad,telefono,gmail,ciudad,direccion) VALUES (?,?,?,?,?,?)`;
     const [results] = await connection.promise().execute(sql, [nombre,edad,telefono,gmail,ciudad,direccion]);
 
@@ -41,6 +50,8 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 }
 
 async function insertarInfromacion(nombre,informacion){
+
+    connection.connect();
 
     const sql = `INSERT INTO informacion (informacion) values(?)`
     const id_persona = `select Personas.id from Personas where Personas.nombre = ?;`
