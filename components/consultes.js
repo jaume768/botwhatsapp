@@ -32,8 +32,13 @@ async function insertaPersona(nombre, edad,telefono,gmail,ciudad,direccion){
 
     connection.connect();
 
-    const sql = `INSERT INTO Personas (nombre, edad,telefono,gmail,ciudad,direccion) VALUES (?,?,?,?,?,?)`;
-    const [results] = await connection.promise().execute(sql, [nombre,edad,telefono,gmail,ciudad,direccion]);
+    try{
+        const sql = `INSERT INTO Personas (nombre, edad,telefono,gmail,ciudad,direccion) VALUES (?,?,?,?,?,?)`;
+        const [results] = await connection.promise().execute(sql, [nombre,edad,telefono,gmail,ciudad,direccion]);
+    }catch(error){
+        console.log(error)
+    }
+    
 
     connection.end();
 }
@@ -82,7 +87,7 @@ async function informacion_persona(persona,nombre) {
         for(let i = 0; i < results.length; i++) {
             mensaje += results[i].informacion + ","
         } 
-        "sendMessage(persona,mensaje)  "                     
+        sendMessage(persona,mensaje)                    
     } catch (error) {
         console.log("tienes un error: " + error.message)
     }

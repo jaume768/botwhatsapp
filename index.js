@@ -17,7 +17,6 @@ let plantilla = 'Consultar el nombre de las personas guardadas: "Personas guarda
                 '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
                 '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"';
 
-informacion_persona("vsafva","jaume")
 
 app.post("/webhook",function(req,res){
     if(req.body.Body == "hola"){
