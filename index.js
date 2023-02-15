@@ -68,7 +68,7 @@ app.post("/webhook",function(req,res){
         informacion_persona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
     if(saberSiActualizarInfo(req.body.Body)){
-        actualizarInfoEspecifica(palabrasFrases(1,req.body.Body),palabrasFrases(2,req.body.Body),palabrasFrases(6,req.body.Body))
+        actualizarInfoEspecifica(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body))
         sendMessage(req.body.WaId,"Información actualizada") 
     }
 })
