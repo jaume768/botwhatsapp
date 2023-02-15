@@ -92,7 +92,6 @@ async function actualizarInfoEspecifica(nombre,dato,informacion){
     try {
         let update = 'UPDATE Personas SET ? = ? WHERE nombre = ?'
         const [results] = await connection.promise().execute(update,[dato, informacion,nombre]);
-        console.log('Se actualizó ' + dato + ' del usuario ' + nombre);
       } catch (error) {
         console.log(error);
       }
