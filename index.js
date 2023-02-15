@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended:true }))
 let plantilla = 'Consultar el nombre de las personas guardadas: "Personas guardadas"' +  
                 '\n \n Consultar todos los recordatorios: "Dime todos los recordatorios"' +  
                 '\n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"' + 
-                '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
+                '\n \n Insertar información de una persona: "Insertar informacion de ,(*nombre de la persona, tiene que estar insertada primero*),(*información*)"' + 
                 '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"';
 
 
