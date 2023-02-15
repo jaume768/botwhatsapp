@@ -82,7 +82,7 @@ app.post("/webhook",function(req,res){
         insertarInfromacion(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body),req.body.WaId)
     }
     if(saberSiDarInformaciónPersona(req.body.Body)){
-        informacionPersona(req.body.WaId,palabrasFrases(6,req.body.Body))
+        informacion_persona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
 
 })
