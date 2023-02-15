@@ -66,7 +66,7 @@ function saberSiDarInformaciónPersona(mensaje){
 }
 
 function saberSiActualizarInfo(mensaje){
-  if(mensaje.substring(0,28) == "Actualizar "){
+  if(mensaje.substring(0,11) == "Actualizar "){
     return true;
   }
   return false;

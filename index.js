@@ -22,7 +22,7 @@ let plantilla = 'Consultar el nombre de las personas guardadas: "Personas guarda
 
 app.post("/webhook",function(req,res){
     if(req.body.Body == "hola"){
-        sendMessage(req.body.WaId,"Hola señor, soy tu Bot, pídeme lo que quieras!! \n Tengo una plantilla para ayudarte si lo necesitas (*Plantilla*)")
+        sendMessage(req.body.WaId,"Hola señor, soy tu Bot, pídeme lo que quieras!! \nTengo una plantilla para ayudarte si lo necesitas (*Plantilla*)")
     }
     if(req.body.Body == "Personas guardadas"){
         let mensaje;
