@@ -76,7 +76,7 @@ async function informacion_persona(persona,nombre) {
     try{
         const sql = `select * from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = ?;`
         const [results] = await connection.promise().query(sql,[nombre]);
-        let contador = (results.length)-1
+        let contador = (results.length)
         console.log(contador)
         console.log(results[contador])
         let mensaje = "Nombre: " + results[contador].nombre + "\n" 
