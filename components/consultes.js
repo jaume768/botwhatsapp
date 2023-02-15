@@ -3,18 +3,6 @@ const {sendMessage} = require("./normales.js")
 
 connection.connect();
 
-async function informacionPersona(persona) {
-    connection.connect();
-
-    const sql = 'select * FROM Personas INNER JOIN Personas_info ON Personas.id = Personas_info.id_persona INNER JOIN informacion ON Personas_info.id_info = informacion.id WHERE Personas.nombre = "' + persona + '";';
-  
-    const [results, fields] = await connection.promise().query(sql);
-  
-    connection.end();
-  
-    return results;
-}
-
 async function personasGuardadas() {
     connection.connect();
 
@@ -100,5 +88,17 @@ async function informacion_persona(persona,nombre) {
 
 }
 
+async function actualizarInfoEspecifica(nombre,dato,informacion){
+    try {
+        const [results] = await connection.execute(
+          'UPDATE Personas SET ? = ? WHERE nombre = ?',
+          [dato, informacion,nombre]
+        );
+        console.log('Se actualizó ' + dato + ' del usuario ' + nombre);
+      } catch (error) {
+        console.log(error);
+      }
+}
 
-module.exports = {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion,informacion_persona};
+module.exports = {personasGuardadas,todosLosRecordatorios,
+                insertaPersona,insertarInfromacion,informacion_persona,actualizarInfoEspecifica};

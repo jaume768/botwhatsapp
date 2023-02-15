@@ -16,24 +16,6 @@ function sendMessage(sender, message) {
 
 }
 
-function saberBuscaInfoPersona(mensaje){
-  if(mensaje.length >= 23 && mensaje.substring(0,23) == "Dame la información de "){
-    return true;
-  }
-
-  return false;
-}
-
-function extraerPersona(mensaje){
-
-  let plantilla = "Dame la información de "
-  if(mensaje.length >= 23 && mensaje.substring(0,23) == "Dame la información de "){
-    let persona = (mensaje.substring(23,mensaje.length))
-    return persona;
-  }
-
-}
-
 function saberSiInsertarPersona(mensaje){
   if(mensaje.substring(0,17) == "Insertar persona "){
     return true;
@@ -90,6 +72,5 @@ function saberSiActualizarInfo(mensaje){
   return false;
 }
 
-module.exports = {sendMessage,saberBuscaInfoPersona,extraerPersona,
-              saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,
-              saberSiDarInformaciónPersona,saberSiActualizarInfo};
+module.exports = {sendMessage,saberSiInsertarPersona,palabrasFrases,
+              saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,saberSiActualizarInfo};

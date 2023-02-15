@@ -1,10 +1,11 @@
 
-const {sendMessage,saberBuscaInfoPersona,extraerPersona,
-    saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,
+const {sendMessage,saberSiInsertarPersona,palabrasFrases,
+    saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,
     saberSiActualizarInfo} = require("./components/normales.js")
 
-const {informacionPersona,personasGuardadas,todosLosRecordatorios,
-        insertaPersona,insertarInfromacion,informacion_persona} = require("./components/consultes.js")
+const {personasGuardadas,todosLosRecordatorios,
+        insertaPersona,insertarInfromacion,informacion_persona,
+        actualizarInfoEspecifica} = require("./components/consultes.js")
 const {PORT} = require('./config.js')
 
 const express = require('express');
@@ -17,7 +18,7 @@ let plantilla = 'Consultar el nombre de las personas guardadas: "Personas guarda
                 '\n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"' + 
                 '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
                 '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"' +
-                '\n \n Actualizar dato en concreto de una persona: "Actualizar ,(*Persona*),(*Dato*),(*información*) (En producción)"';
+                '\n \n Actualizar dato en concreto de una persona: "Actualizar ,(*Persona*),(*Dato*),(*información*)"';
 
 app.post("/webhook",function(req,res){
     if(req.body.Body == "hola"){
@@ -57,9 +58,7 @@ app.post("/webhook",function(req,res){
         })();
     }
     if(saberSiInsertarPersona(req.body.Body)){
-        let sql = req.body.Body
-        console.log(palabrasFrases(1,sql))
-        insertaPersona(palabrasFrases(1,sql),palabrasFrases(2,sql),palabrasFrases(3,sql),palabrasFrases(4,sql),palabrasFrases(5,sql),palabrasFrases(6,sql))
+        insertaPersona(palabrasFrases(1,req.body.Body),palabrasFrases(2,req.body.Body),palabrasFrases(3,req.body.Body),palabrasFrases(4,req.body.Body),palabrasFrases(5,req.body.Body),palabrasFrases(6,req.body.Body))
         sendMessage(req.body.WaId,"La persona " + palabrasFrases(1,sql) + " ya está insertada!!")
     }
     if(saberSiInsertarInformacionPersona(req.body.Body)){
@@ -69,7 +68,8 @@ app.post("/webhook",function(req,res){
         informacion_persona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
     if(saberSiActualizarInfo(req.body.Body)){
-
+        actualizarInfoEspecifica(palabrasFrases(1,req.body.Body),palabrasFrases(2,req.body.Body),palabrasFrases(6,req.body.Body))
+        sendMessage(req.body.WaId,"Información actualizada") 
     }
 })
 
