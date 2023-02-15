@@ -1,6 +1,10 @@
+
 const {sendMessage,saberBuscaInfoPersona,extraerPersona,
-    saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona} = require("./components/normales.js")
-const {informacionPersona,personasGuardadas,todosLosRecordatorios,insertaPersona,insertarInfromacion,informacion_persona} = require("./components/consultes.js")
+    saberSiInsertarPersona,palabrasFrases,saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,
+    saberSiActualizarInfo} = require("./components/normales.js")
+
+const {informacionPersona,personasGuardadas,todosLosRecordatorios,
+        insertaPersona,insertarInfromacion,informacion_persona} = require("./components/consultes.js")
 const {PORT} = require('./config.js')
 
 const express = require('express');
@@ -13,7 +17,8 @@ let plantilla = 'Consultar información persona: "Dame la información de (*nomb
                 '\n \n Consultar todos los recordatorios: "Dime todos los recordatorios"' +  
                 '\n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"' + 
                 '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
-                '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"';
+                '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"' +
+                '\n \n Actualizar dato en concreto de una persona: "Actualizar ,(*Persona*),(*Dato*),(*información*) (En producción)"';
 
 app.post("/webhook",function(req,res){
     if(saberBuscaInfoPersona(req.body.Body)){
@@ -37,7 +42,7 @@ app.post("/webhook",function(req,res){
         })();
     }
     if(req.body.Body == "hola"){
-        sendMessage(req.body.WaId,req.body.Body)
+        sendMessage(req.body.WaId,"Hola señor, soy tu Bot, pídeme lo que quieras!! \n Tengo una plantilla para ayudarte si lo necesitas (*Plantilla*)")
     }
     if(req.body.Body == "Personas guardadas"){
         let mensaje;
@@ -84,7 +89,9 @@ app.post("/webhook",function(req,res){
     if(saberSiDarInformaciónPersona(req.body.Body)){
         informacion_persona(req.body.WaId,palabrasFrases(6,req.body.Body))
     }
+    if(saberSiActualizarInfo(req.body.Body)){
 
+    }
 })
 
 app.listen(PORT,() => {
