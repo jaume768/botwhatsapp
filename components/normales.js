@@ -65,12 +65,5 @@ function saberSiDarInformaciónPersona(mensaje){
   return false;
 }
 
-function saberSiActualizarInfo(mensaje){
-  if(mensaje.substring(0,11) == "Actualizar "){
-    return true;
-  }
-  return false;
-}
-
 module.exports = {sendMessage,saberSiInsertarPersona,palabrasFrases,
-              saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,saberSiActualizarInfo};
+              saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona};

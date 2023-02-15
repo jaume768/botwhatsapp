@@ -71,31 +71,23 @@ async function informacion_persona(persona,nombre) {
     try{
         const sql = `select * from Personas,Personas_info,informacion where Personas.id = Personas_info.id_persona and Personas_info.id_info = informacion.id and Personas.nombre = ?;`
         const [results] = await connection.promise().query(sql,[nombre]);
-        let mensaje = "Nombre: " + results[0].nombre + "\n" 
-                        + "Edad: " + results[0].edad + "\n" 
-                        + "Telefono: " + results[0].telefono + "\n"
-                        + "Gmail: " + results[0].gmail + "\n" 
-                        + "Ciudad: " + results[0].ciudad + "\n"
-                        + "Direccion: " + results[0].direccion + "\n"    
+        let contador = (results.length)-1
+        let mensaje = "Nombre: " + results[contador].nombre + "\n" 
+                        + "Edad: " + results[contador].edad + "\n" 
+                        + "Telefono: " + results[contador].telefono + "\n"
+                        + "Gmail: " + results[contador].gmail + "\n" 
+                        + "Ciudad: " + results[contador].ciudad + "\n"
+                        + "Direccion: " + results[contador].direccion + "\n"    
                         + "Información interesante: "   
         for(let i = 0; i < results.length; i++) {
             mensaje += results[i].informacion + ","
         } 
-        sendMessage(persona,mensaje)                       
+        "sendMessage(persona,mensaje)  "                     
     } catch (error) {
         console.log("tienes un error: " + error.message)
     }
 
 }
 
-async function actualizarInfoEspecifica(nombre,informacion){
-    try {
-        let update = 'UPDATE Personas SET ciudad = ? WHERE nombre = ?;'
-        const [results] = await connection.promise().execute(update,[informacion,nombre]);
-      } catch (error) {
-        console.log(error);
-      }
-}
-
 module.exports = {personasGuardadas,todosLosRecordatorios,
-                insertaPersona,insertarInfromacion,informacion_persona,actualizarInfoEspecifica};
+                insertaPersona,insertarInfromacion,informacion_persona};

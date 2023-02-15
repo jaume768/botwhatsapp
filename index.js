@@ -1,11 +1,9 @@
 
 const {sendMessage,saberSiInsertarPersona,palabrasFrases,
-    saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona,
-    saberSiActualizarInfo} = require("./components/normales.js")
+    saberSiInsertarInformacionPersona,saberSiDarInformaciónPersona} = require("./components/normales.js")
 
 const {personasGuardadas,todosLosRecordatorios,
-        insertaPersona,insertarInfromacion,informacion_persona,
-        actualizarInfoEspecifica} = require("./components/consultes.js")
+        insertaPersona,insertarInfromacion,informacion_persona} = require("./components/consultes.js")
 const {PORT} = require('./config.js')
 
 const express = require('express');
@@ -17,8 +15,9 @@ let plantilla = 'Consultar el nombre de las personas guardadas: "Personas guarda
                 '\n \n Consultar todos los recordatorios: "Dime todos los recordatorios"' +  
                 '\n \n Insertar persona: "Insertar persona (*nombre de la persona*),(*edad*),(*telefono*),(*gmail*),(*ciudad*),(*direccion*)"' + 
                 '\n \n Insertar información de una persona: "Insertar informacion de (*nombre de la persona, tiene que estar insertada primero*)"' + 
-                '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"' +
-                '\n \n Actualizar dato en concreto de una persona: "Actualizar ,(*Persona*),(*Dato*),(*información*)"';
+                '\n \n Saber la información de una persona: "Dame toda la información de ,(*Nombre de la persona*)"';
+
+informacion_persona("vsafva","jaume")
 
 app.post("/webhook",function(req,res){
     if(req.body.Body == "hola"){
@@ -66,10 +65,6 @@ app.post("/webhook",function(req,res){
     }
     if(saberSiDarInformaciónPersona(req.body.Body)){
         informacion_persona(req.body.WaId,palabrasFrases(6,req.body.Body))
-    }
-    if(saberSiActualizarInfo(req.body.Body)){
-        actualizarInfoEspecifica(palabrasFrases(1,req.body.Body),palabrasFrases(6,req.body.Body))
-        sendMessage(req.body.WaId,"Información actualizada") 
     }
 })
 
