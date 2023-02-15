@@ -90,8 +90,8 @@ async function informacion_persona(persona,nombre) {
 
 async function actualizarInfoEspecifica(nombre,dato,informacion){
     try {
-        let update = 'UPDATE Personas SET ? = ? WHERE nombre = ?;'
-        const [results] = await connection.promise().execute(update,[dato, informacion,nombre]);
+        let update = 'UPDATE Personas SET ciudad = ? WHERE nombre = ?;'
+        const [results] = await connection.promise().execute(update,[informacion,nombre]);
       } catch (error) {
         console.log(error);
       }
